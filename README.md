@@ -17,3 +17,7 @@ In this project, I built an ETL pipeline that cleaned messages using regex and N
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+![alt text](https://github.com/kzhao682/Disaster_Response/blob/master/images/header.png)
+
+![alt text](https://github.com/kzhao682/Disaster_Response/blob/master/images/plots.png)
