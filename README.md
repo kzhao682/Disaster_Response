@@ -1,5 +1,10 @@
 # Disaster Response Pipeline Project
 
+### Background:
+Following a disaster, there are a number of different problems that may arise. Different types of disaster response organizations take care of different parts of the disasters and observe messages to understand the needs of the situation. They have the least capacity to filter out messages during a large disaster, so predictive modeling can help classify different messages more efficiently.
+
+In this project, I built an ETL pipeline that cleaned messages using regex and NLTK. The text data was trained on a multioutput classifier model using random forest. The final deliverable is Flask app that classifies input messages and shows visualizations of key statistics of the dataset.
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
