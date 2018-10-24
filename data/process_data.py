@@ -5,7 +5,9 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
-    
+    """
+    Loads and merges messages and categories to create dataframe
+    """    
     # load dataframes
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -17,7 +19,10 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
-    
+    """
+    Takes a dataframe and splits categories and converts them into binary 0 or 1
+    """    
+
     # split categories into separate columns
     categories = df.categories.str.split(';', expand=True)
 
@@ -46,6 +51,10 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    Load dataframe to a SQLite database
+    """
+
     engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('message_categories', engine, index=False)
 

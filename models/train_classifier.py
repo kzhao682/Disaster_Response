@@ -25,6 +25,10 @@ sys.path.append('/home/kevinzhao/Udacity/data/')
 warnings.simplefilter("ignore")
 
 def load_data(database_filepath):
+    """
+    Load data from SQLite database and split into features and target
+    """
+
     # load data from database
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     df = pd.read_sql_table('message_categories', engine)
@@ -40,7 +44,10 @@ def load_data(database_filepath):
     return X, y, categories
 
 def tokenize(text):
-    
+    """
+    Remove capitalization and special characters and lemmatize texts
+    """    
+
     # get tokens from text
     tokens = WhitespaceTokenizer().tokenize(text)
     lemmatizer = WordNetLemmatizer()
@@ -58,9 +65,15 @@ def tokenize(text):
     return processed_tokens
 
 def compute_text_length(data):
+    """
+    Compute the character length of texts
+    """
     return np.array([len(text) for text in data]).reshape(-1, 1)
 
 def build_model():
+    """
+    Build model with a pipeline
+    """
 
     # create pipeline
     model = Pipeline([
@@ -75,6 +88,9 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    Show precision, recall, f1-score of model scored on testing set
+    """    
     
     # make predictions with model
     Y_pred = model.predict(X_test)
@@ -85,7 +101,9 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-    
+    """
+    Pickle model to designated file
+    """
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
