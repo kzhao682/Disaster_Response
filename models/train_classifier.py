@@ -76,13 +76,19 @@ def build_model():
     """
 
     # create pipeline
-    model = Pipeline([
+    pipeline = Pipeline([
         ('features', FeatureUnion([('text', Pipeline([('vect', CountVectorizer(tokenizer=tokenize)),
                                                      ('tfidf', TfidfTransformer()),
                                                      ])),
                                   ('length', Pipeline([('count', FunctionTransformer(compute_text_length, validate=False))]))]
                                  )),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))])
+
+    # use GridSearch to tune model with optimal parameters
+    parameters = {'features__text__vect__ngram_range':[(1,2),(2,2)],
+            'clf__estimator__n_estimators':[50, 100]
+             }
+    model = GridSearchCV(pipeline, parameters)
 
     return model
 
